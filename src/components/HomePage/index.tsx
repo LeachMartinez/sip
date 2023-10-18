@@ -2,14 +2,25 @@ import { useState } from "react";
 import Button, { ButtonLabel } from "../ui/Button";
 import Input, { InputLabel } from "../ui/form/Input";
 import styles from "./HomePahe.module.scss";
-
+import { faker } from '@faker-js/faker';
 type typeSipAccount = {
   username: string,
   password: string
 }
 
+
+const testArray: typeSipAccount[] = [];
+
+for(let i=0;i< 100; i++) {
+  testArray.push({username: faker.internet.userName(), password: faker.internet.password()});
+}
+
 const HomePage: React.FC = () => {
-  const [sipAccounts, setSipAccounts] = useState<typeSipAccount[]>([]);
+  const [sipAccounts, setSipAccounts] = useState<typeSipAccount[]>([{
+    username: "test",
+    password: "pwd"
+  }, ...testArray]);
+
   const [modalOpen, setModalOpen] = useState(false);
   const handleSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -33,12 +44,22 @@ const HomePage: React.FC = () => {
   return (
     <>
       <div className={styles.content}>
-        {
-          sipAccounts.map(account => <div key={account.username} >{account.username} {account.password}</div>)
-        }
-        <Button onClick={() => setModalOpen(true)}>open</Button>
-      </div>
+        <h2>Hello, {sipAccounts[0].username}!</h2>
 
+        <div>
+          <span>Search</span>
+          <Input type="password" name="sipPassword" placeholder="password"/>
+        </div>
+        <div className={styles.users}>
+          <h2>Users:</h2>
+          <div className={styles.users__list}>
+            {
+              sipAccounts.map(account => <div className={styles.users__list__item} key={account.username}>{account.username}</div>)
+            }
+          </div>
+        </div>
+        <Button onClick={() => setModalOpen(true)}>Create account</Button>
+      </div>
 
       <div className={[styles.modal, modalOpen ? styles.modal__active : null].join(" ")} >
         <form className={styles.sipform} onSubmit={handleSubmitForm}>

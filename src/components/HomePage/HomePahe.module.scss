@@ -12,6 +12,7 @@
   justify-content: center;
   align-items: center;
   visibility: hidden;
+
   &__active {
     visibility: visible;
   }
@@ -45,4 +46,22 @@
   background-color: #fff;
   border-radius: 5px;
   padding: 24px 16px;
+}
+
+.users {
+  &__list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-height: 400px;
+    overflow-y: auto;
+
+    &__item {
+      margin-top: 8px;
+      padding: 8px 16px;
+      
+      border-radius: 5px;
+      border: 1px solid $bgSecondColor;
+    }
+  }
 }
