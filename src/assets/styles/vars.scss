@@ -1,0 +1,10 @@
+@mixin bgColor {
+  background: $bgColorDark;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, $bgTridColor, $bgSecondColor, $bgColorDark);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, $bgTridColor, $bgSecondColor, $bgColorDark); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+$bgColorDark: #0F2027;
+$bgSecondColor: #203A43;
+$bgTridColor: #2C5364;
+$lightColor: #d4d4d4;

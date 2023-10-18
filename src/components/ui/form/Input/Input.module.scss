@@ -1,0 +1,44 @@
+@import "../../../../assets/styles/vars";
+
+.input {
+  border-radius: 3px;
+  background: transparent;
+  border: 1px solid #ffffff20;
+  padding: 8px 12px;
+  color: $lightColor;
+  transition: 0.2s ease-in-out all;
+  box-shadow: none;
+
+  &::placeholder {
+    color: $lightColor;
+    opacity: 0.2; /* Firefox */
+    font-weight: 500;
+  }
+
+  &:hover {
+    border: 1px solid #ffffff90;
+  }
+
+  &:focus-visible {
+    outline: none;
+    border: 1px solid #ffffff90;
+    box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 5px, rgba(255, 255, 255, 0.05) 0px 0px 5px;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 12px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  &__text {
+    margin-bottom: 4px;
+    margin-left: 4px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+}
