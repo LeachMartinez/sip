@@ -3,24 +3,39 @@ import Button, { ButtonLabel } from "../ui/Button";
 import Input, { InputLabel } from "../ui/form/Input";
 import styles from "./HomePahe.module.scss";
 import { faker } from '@faker-js/faker';
+import Image from "next/image";
+import MenuIcon from '@mui/icons-material/Menu';
+import HouseIcon from '@mui/icons-material/House';
+import SearchIcon from '@mui/icons-material/Search';
+import HistoryIcon from '@mui/icons-material/History';
+import ContactsIcon from '@mui/icons-material/Contacts';
+import VideocamIcon from '@mui/icons-material/Videocam';
+import CallIcon from '@mui/icons-material/Call';
+import { SwipeableDrawer } from "@mui/material";
+
 type typeSipAccount = {
+  name?: string,
   username: string,
-  password: string
-}
-
-
-const testArray: typeSipAccount[] = [];
-
-for(let i=0;i< 100; i++) {
-  testArray.push({username: faker.internet.userName(), password: faker.internet.password()});
+  password: string,
+  avatar?: string
 }
 
 const HomePage: React.FC = () => {
-  const [sipAccounts, setSipAccounts] = useState<typeSipAccount[]>([{
-    username: "test",
-    password: "pwd"
-  }, ...testArray]);
+  const testArray: typeSipAccount[] = [];
 
+  for(let i=0;i< 100; i++) {
+    testArray.push({avatar: faker.internet.avatar(), name: faker.person.fullName(), username: faker.internet.userName(), password: faker.internet.password()});
+  }
+
+  const [sipAccounts, setSipAccounts] = useState<typeSipAccount[]>([{
+    name: "leach",
+    username: "test",
+    password: "pwd",
+    avatar: faker.internet.avatar()
+  }, ...testArray]);
+  
+  
+  const [openDrawer, setOpenDrawer] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const handleSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -43,23 +58,76 @@ const HomePage: React.FC = () => {
 
   return (
     <>
-      <div className={styles.content}>
-        <h2>Hello, {sipAccounts[0].username}!</h2>
-
-        <div>
-          <span>Search</span>
-          <Input type="password" name="sipPassword" placeholder="password"/>
-        </div>
-        <div className={styles.users}>
-          <h2>Users:</h2>
-          <div className={styles.users__list}>
-            {
-              sipAccounts.map(account => <div className={styles.users__list__item} key={account.username}>{account.username}</div>)
-            }
+      <>
+        <div className={styles.header}>
+          <div className={styles.header__avatar}>
+            <Image 
+              className={styles.header__avatar__image} 
+              src={sipAccounts[0].avatar!} 
+              alt="avatar"
+              width={50}
+              height={50}
+            />
+          </div>
+          <div className={styles.header__name}>
+            { sipAccounts[0].name }
+          </div>
+          <div className={styles.header__menu} onClick={() => setOpenDrawer(true)}>
+            <MenuIcon />
           </div>
         </div>
-        <Button onClick={() => setModalOpen(true)}>Create account</Button>
+        <SwipeableDrawer 
+          className={styles.header__menuList__drawer}
+          anchor={"bottom"}
+          open={openDrawer}
+          onClose={() => setOpenDrawer(false)}
+          onOpen={() => setOpenDrawer(true)}
+          sx={
+            {
+              '& .MuiPaper-root ': {
+                borderRadius: '50px 50px 0 0',
+              }
+            }
+          }
+        >
+          <ul className={styles.header__menuList}>
+            <li className={styles.header__menuItem}> <HouseIcon/> Home</li>
+            <li className={styles.header__menuItem}> <SearchIcon/> Search</li>
+            <li className={styles.header__menuItem}> <HistoryIcon/> Histroy</li>
+            <li className={styles.header__menuItem}> <ContactsIcon/> Contacts</li>
+          </ul>
+        </SwipeableDrawer>
+      </>
+
+      <div className={styles.content}>    
+        <div className={styles.contact}>
+          <div className={styles.contact__text}>
+            <span className={styles.contact__name}>{ sipAccounts[1].name }</span>
+            <span className={styles.contact__username}>@{ sipAccounts[1].username }</span>
+          </div>
+          <div className={styles.contact__avatar}>
+            <Image 
+              className={styles.contact__avatar__image} 
+              src={sipAccounts[1].avatar!} 
+              alt="avatar"
+              width={250}
+              height={250}
+            />
+          </div>
+          <div className={styles.contact__btns}>
+            <Button className={styles.contact__btn}>
+              <CallIcon/>
+            </Button>
+            <Button className={styles.contact__btn}>
+              <VideocamIcon/>
+            </Button>
+            <Button className={styles.contact__btn}>
+              <HistoryIcon/>
+            </Button>
+          </div>
+        </div>
       </div>
+
 
       <div className={[styles.modal, modalOpen ? styles.modal__active : null].join(" ")} >
         <form className={styles.sipform} onSubmit={handleSubmitForm}>
@@ -82,3 +150,19 @@ const HomePage: React.FC = () => {
 }
 
 export default HomePage;
+
+
+ {/* <h2>Hello, {sipAccounts[0].username}!</h2>
+  <div>
+    <span>Search</span>
+    <Input type="password" name="sipPassword" placeholder="password"/>
+  </div>
+  <div className={styles.users}>
+    <h2>Users:</h2>
+    <div className={styles.users__list}>
+    {
+      sipAccounts.map(account => <div className={styles.users__list__item} key={account.username}>{account.username}</div>)
+    }
+  </div>
+</div> */}
+{/* <Button onClick={() => setModalOpen(true)}>Create account</Button> */}

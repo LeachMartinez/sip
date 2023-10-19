@@ -8,7 +8,7 @@ type TypeInputLabel = {
 
 const Button: React.FC<TypeInput> = (props) => {
   return (
-    <button className={styles.btn} {...props}>{props.children}</button>
+    <button className={[styles.btn, props.className].join(" ")} {...props}>{props.children}</button>
   );
 } 
 

@@ -41,11 +41,60 @@
 
 .content {
   width: 100%;
-  height: calc(100% - 48px);
-  margin: 24px 16px;
-  background-color: #fff;
-  border-radius: 5px;
-  padding: 24px 16px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__text {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: $lightColor;
+    margin-bottom: 64px;
+  }
+
+  &__name {
+    font-weight: 500;
+    font-size: 32px;
+  }
+
+  &__username {
+    font-weight: 300;
+    font-size: 12px;
+  }
+
+  &__avatar {
+    width: 250px;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 64px;
+
+    &__image {
+      border-radius: 250px
+    }
+  }
+
+  &__btn {
+    background: transparent;
+    color: $lightColor;
+    svg {
+      font-size: 36px;
+    }
+  }
+
+  &__btns {
+    display: flex;
+    gap: 48px;
+  }
 }
 
 .users {
@@ -65,3 +114,79 @@
     }
   }
 }
+
+
+.header {
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  color: $lightColor;
+
+  &__menu {
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    background: transparent;
+    transition: 0.3s ease-in all;
+
+    svg {
+      font-size: 34px;
+      transition: 0.3s ease-in all;
+    }
+
+    &:hover {
+      background: #ffffff10;
+
+      svg {
+        transform: scale(0.9);
+      }
+    }
+  }
+
+  &__avatar {
+    padding: 2px;
+    height: 50px;
+    width: 50px;
+
+    &__image {
+      border-radius: 50px;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__name {
+    font-size: 20px;
+    text-transform: capitalize;
+  }
+
+  &__menuList {
+    text-decoration: none;
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 32px 0;
+  }
+  &__menuItem {
+    padding: 8px;
+    font-weight: 400;
+    margin-bottom: 16px;
+    width: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 8px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
