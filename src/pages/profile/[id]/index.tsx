@@ -4,7 +4,7 @@ const Profile: React.FC = () => {
   
   return (
     <AuthLayout>
-      123
+      <div>123</div>
     </AuthLayout>
   );
 }

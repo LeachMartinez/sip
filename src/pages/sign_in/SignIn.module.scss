@@ -1,0 +1,13 @@
+@import "../../assets/styles/vars.scss";
+
+.signIn {
+  display: flex;
+  justify-content: center;
+  width: calc(100vw - 32px);
+  flex-direction: column;
+  color: $lightColor;
+
+  &__inputs {
+    margin-top: 12px;
+  }
+}

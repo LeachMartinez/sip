@@ -17,7 +17,7 @@ const Header: React.FC = () => {
         <div className={styles.header__avatar}>
           <Image
             className={styles.header__avatar__image} 
-            src={"sipAccounts[0].avatar!"} 
+            src={""} 
             alt="avatar"
             width={50}
             height={50}

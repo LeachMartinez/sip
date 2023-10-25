@@ -1,32 +1,27 @@
 
-import { PropsWithChildren } from 'react';
-
-// export const getServerSideProps = withSession(
-//   async (req, res) => {
-//     const user = req.session.get('user');
-
-//     if (!user) {
-//       return {
-//         redirect: {
-//           destination: '/login',
-//           permanent: false,
-//         },
-//       };
-//     }
-
-//     return {
-//       props: {
-//         user,
-//       },
-//     };
-//   }
-// );
+import { PropsWithChildren, useEffect, useState } from 'react';
+import Layout from '.';
+import { authAxios } from '@/service/Api';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const AuthLayout: React.FC<PropsWithChildren> = ({children}) => {
+  const [isFetching, setIsFetching] = useState(false);
+  useEffect(() => {
+    setIsFetching(() => true);
+
+    (async () => {
+      console.log(await authAxios.get("/user"));
+    })();
+
+    setIsFetching(() => false);
+  }, [isFetching]);
+  
+  if (isFetching) return <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}><CircularProgress/></div>;
+
   return (
-    <>
+    <Layout>
       {children}
-    </>
+    </Layout>
   )
 }
 export default AuthLayout;

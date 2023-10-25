@@ -1,10 +1,13 @@
 import { PropsWithChildren } from "react"
 import Header from "../Header";
+import Meta from "./MetaLayout";
 const Layout: React.FC<PropsWithChildren> = ({children}) => {
   return (
     <>
-      <Header/>
-      {children}
+      <Meta>
+        {/* <Header/> */}
+        {children}
+      </Meta>
     </>
   )
 }
