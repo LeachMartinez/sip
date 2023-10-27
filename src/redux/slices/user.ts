@@ -22,6 +22,8 @@ export const userSlice = createSlice({
       state.firstName = action.payload.firstName;
       state.lastName = action.payload.lastName;
       state.email = action.payload.email
+      state.username = action.payload.username;
+      state.id = action.payload.id;
       state.isAuth = true;
     },
     logoutUser: (state) => {

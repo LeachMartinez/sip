@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./Header.module.scss";
-import { SwipeableDrawer } from "@mui/material";
+import { Avatar, SwipeableDrawer } from "@mui/material";
 import { useState } from "react";
 
 import MenuIcon from '@mui/icons-material/Menu';
@@ -8,23 +8,30 @@ import HouseIcon from '@mui/icons-material/House';
 import SearchIcon from '@mui/icons-material/Search';
 import ContactsIcon from '@mui/icons-material/Contacts';
 import HistoryIcon from '@mui/icons-material/History';
+import { useAppSelector } from "@/redux/hooks";
 
 const Header: React.FC = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
+  const user = useAppSelector((state) => state.user);
+
+  let avatarType = "isNotAuth";
+  if (user.isAuth && user.avatar) avatarType = "isAuthWithAvatar";
+  if (user.isAuth && !user.avatar) avatarType = "isAuthWitoutAvatr";
+
+  const avtarVariants: any = {
+    isAuthWithAvatar: <HeaderImage src={user.avatar!}/>,
+    isAuthWitoutAvatr: <Avatar>{user.username[0]}</Avatar>,
+    isNotAuth: <Avatar>G</Avatar>
+  }
+
   return (
     <header>
       <div className={styles.header}>
         <div className={styles.header__avatar}>
-          <Image
-            className={styles.header__avatar__image} 
-            src={""} 
-            alt="avatar"
-            width={50}
-            height={50}
-          />
+          {avtarVariants[avatarType]}
         </div>
         <div className={styles.header__name}>
-          {/* { sipAccounts[0].name } */}
+          { user.isAuth ? user.username : "Hello, Guest!" }
         </div>
         <div className={styles.header__menu} onClick={() => setOpenDrawer(true)}>
           <MenuIcon />
@@ -53,6 +60,18 @@ const Header: React.FC = () => {
         </ul>
       </SwipeableDrawer>
     </header>
+  )
+}
+
+const HeaderImage: React.FC<{src: string}> = ({src}) => {
+  return (
+    <Image
+      className={styles.header__avatar__image} 
+      src={src} 
+      alt="avatar"
+      width={50}
+      height={50}
+    />
   )
 }
 

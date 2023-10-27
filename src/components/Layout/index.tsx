@@ -5,7 +5,7 @@ const Layout: React.FC<PropsWithChildren> = ({children}) => {
   return (
     <>
       <Meta>
-        {/* <Header/> */}
+        <Header/>
         {children}
       </Meta>
     </>

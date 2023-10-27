@@ -1,6 +1,5 @@
 import { useState } from "react";
-import Button, { ButtonLabel } from "../ui/Button";
-import Input, { InputLabel } from "../ui/form/Input";
+import Button from "../ui/Button";
 import styles from "./HomePahe.module.scss";
 import { faker } from '@faker-js/faker';
 import Image from "next/image";
