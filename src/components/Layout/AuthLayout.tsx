@@ -9,7 +9,7 @@ import { authUser } from '@/redux/slices/user';
 import { useRouter } from "next/router";
 
 const AuthLayout: React.FC<PropsWithChildren> = ({children}) => {
-  const Router = useRouter();
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const [isFetching, setIsFetching] = useState(false);
 
@@ -21,12 +21,12 @@ const AuthLayout: React.FC<PropsWithChildren> = ({children}) => {
         const result = await authAxios.get("/user");
         dispatch(authUser(result.data as TypeUser));
       } catch (error: any) {
-        Router.push("/sign_in");
+        router.push(`/sign_in?referer=${router.asPath}`);
       }
     })();
 
     setIsFetching(() => false);
-  }, [isFetching, dispatch, Router]);
+  }, [isFetching, dispatch, router]);
 
   if (isFetching) return <Loader/>;
 
