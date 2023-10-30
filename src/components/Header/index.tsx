@@ -53,10 +53,26 @@ const Header: React.FC = () => {
         }
       >
         <ul className={styles.header__menuList}>
-          <li className={styles.header__menuItem}> <HouseIcon/> Home</li>
-          <li className={styles.header__menuItem}> <SearchIcon/> Search</li>
-          <li className={styles.header__menuItem}> <HistoryIcon/> Histroy</li>
-          <li className={styles.header__menuItem}> <ContactsIcon/> Contacts</li>
+          <li className={styles.header__menuItem}>
+            <a href={`/profile/${user.id}`}>
+              <HouseIcon/> Home
+            </a>
+          </li>
+          <li className={styles.header__menuItem}>
+            <a href={`/contacts`}>
+              <SearchIcon/>  Search contacts
+            </a>
+          </li>
+          <li className={styles.header__menuItem}>
+            <a href={`history/${user.id}`}>
+              <HistoryIcon/> Histroy
+            </a>
+          </li>
+          <li className={styles.header__menuItem}>
+            <a href={`/contacts/${user.id}`}>
+              <ContactsIcon/> Contacts
+            </a>
+          </li>
         </ul>
       </SwipeableDrawer>
     </header>
