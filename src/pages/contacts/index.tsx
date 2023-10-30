@@ -1,11 +1,12 @@
 import AuthLayout from "@/components/Layout/AuthLayout";
+import SearchContacts from "@/components/SearchContacts";
 
-const SearchContacts: React.FC = () => {
+const SearchContactsPage: React.FC = () => {
   return (
     <AuthLayout>
-
+      <SearchContacts/>
     </AuthLayout>
   )
 }
 
-export default SearchContacts;
+export default SearchContactsPage;
